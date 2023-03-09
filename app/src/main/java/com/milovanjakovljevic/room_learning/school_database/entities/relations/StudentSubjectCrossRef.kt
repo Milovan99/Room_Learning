@@ -1,4 +1,4 @@
-package com.milovanjakovljevic.room_learning.entities.relations
+package com.milovanjakovljevic.room_learning.school_database.entities.relations
 
 import androidx.room.Entity
 

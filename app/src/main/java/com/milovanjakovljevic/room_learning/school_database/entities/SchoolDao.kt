@@ -1,11 +1,12 @@
-package com.milovanjakovljevic.room_learning
+package com.milovanjakovljevic.room_learning.school_database.entities
 
 import androidx.room.*
-import com.milovanjakovljevic.room_learning.entities.Director
-import com.milovanjakovljevic.room_learning.entities.School
-import com.milovanjakovljevic.room_learning.entities.Student
-import com.milovanjakovljevic.room_learning.entities.Subject
-import com.milovanjakovljevic.room_learning.entities.relations.*
+import com.milovanjakovljevic.room_learning.school_database.entities.Director
+import com.milovanjakovljevic.room_learning.school_database.entities.School
+import com.milovanjakovljevic.room_learning.school_database.entities.Student
+import com.milovanjakovljevic.room_learning.school_database.entities.Subject
+import com.milovanjakovljevic.room_learning.school_database.entities.relations.*
+import com.milovanjakovljevic.room_learning.school_database.entities.relations.*
 
 
 @Dao
@@ -18,7 +19,7 @@ interface SchoolDao {
     suspend fun insertDirector(director: Director)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStudent(student:Student)
+    suspend fun insertStudent(student: Student)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSubject(subject: Subject)

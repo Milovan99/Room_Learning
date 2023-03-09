@@ -1,14 +1,10 @@
-package com.milovanjakovljevic.room_learning
+package com.milovanjakovljevic.room_learning.school_database.entities
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.milovanjakovljevic.room_learning.entities.Director
-import com.milovanjakovljevic.room_learning.entities.School
-import com.milovanjakovljevic.room_learning.entities.Student
-import com.milovanjakovljevic.room_learning.entities.Subject
-import com.milovanjakovljevic.room_learning.entities.relations.StudentSubjectCrossRef
+import com.milovanjakovljevic.room_learning.school_database.entities.relations.StudentSubjectCrossRef
 
 @Database(
     entities = [
@@ -22,13 +18,13 @@ import com.milovanjakovljevic.room_learning.entities.relations.StudentSubjectCro
 )
 abstract class SchoolDatabase : RoomDatabase(){
 
-    abstract val schoolDao:SchoolDao
+    abstract val schoolDao: SchoolDao
 
     companion object{
         @Volatile
-        private var INSTANCE:SchoolDatabase?=null
+        private var INSTANCE: SchoolDatabase?=null
 
-        fun getInstance(context:Context):SchoolDatabase{
+        fun getInstance(context:Context): SchoolDatabase {
             synchronized(this){
 
                 return INSTANCE ?: Room.databaseBuilder(
@@ -36,7 +32,7 @@ abstract class SchoolDatabase : RoomDatabase(){
                     SchoolDatabase::class.java,
                     "school_db"
                 ).build().also {
-                    INSTANCE=it
+                    INSTANCE =it
                 }
             }
         }

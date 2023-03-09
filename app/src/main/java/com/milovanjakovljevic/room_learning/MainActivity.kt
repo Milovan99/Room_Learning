@@ -3,11 +3,10 @@ package com.milovanjakovljevic.room_learning
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.milovanjakovljevic.room_learning.entities.Director
-import com.milovanjakovljevic.room_learning.entities.School
-import com.milovanjakovljevic.room_learning.entities.Student
-import com.milovanjakovljevic.room_learning.entities.Subject
-import com.milovanjakovljevic.room_learning.entities.relations.StudentSubjectCrossRef
+import com.milovanjakovljevic.room_learning.phone_database.entities.*
+import com.milovanjakovljevic.room_learning.phone_database.entities.relations.CategoryAppCrossRef
+import com.milovanjakovljevic.room_learning.school_database.entities.*
+import com.milovanjakovljevic.room_learning.school_database.entities.relations.StudentSubjectCrossRef
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -15,8 +14,52 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val dao = SchoolDatabase.getInstance(this).schoolDao
 
+        val dao = PhoneDatabase.getInstance(this).phoneDao
+
+        val persons= listOf(
+            Person("Milovan Jakovljevic","Samsung"),
+            Person("Djordje Vasilic","Huawei"),
+            Person("Srdjan Ostojic","Iphone")
+        )
+
+        val apps = listOf(
+            App("Instagram","Samsung"),
+            App("Tinder","Huawei"),
+            App("Cugopol","Iphone")
+        )
+
+        val categories= listOf(
+            Category("Social"),
+            Category("Gaming")
+        )
+
+        val phones = listOf(
+            Phone("Samsung"),
+            Phone("Huawei"),
+            Phone("Iphone")
+        )
+
+        val appCategoryRelations = listOf(
+            CategoryAppCrossRef("Social","Instagram"),
+            CategoryAppCrossRef("Social","Tinder"),
+            CategoryAppCrossRef("Gaming","Cugopol"),
+            CategoryAppCrossRef("Gaming","Tinder")
+        )
+
+
+        lifecycleScope.launch{
+            persons.forEach{dao.insertPerson(it)}
+            apps.forEach{dao.insertApp(it)}
+            phones.forEach{dao.insertPhone(it)}
+            categories.forEach{dao.insertCategory(it)}
+            appCategoryRelations.forEach{dao.insertCategoryAppCrossRef(it)}
+        }
+
+
+
+
+        /*
         val directors = listOf(
             Director("Mike Litoris", "Jake Wharton School"),
             Director("Jack Goff", "Kotlin School"),
@@ -60,6 +103,6 @@ class MainActivity : AppCompatActivity() {
             students.forEach { dao.insertStudent(it) }
             studentSubjectRelations.forEach { dao.insertStudentSubjectCrossRef(it) }
 
-            }
+            }*/
     }
 }
